@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django import forms
 from smtplib import SMTPAuthenticationError, SMTPConnectError, SMTPDataError
-from . import email
+from . import apiRequest as notification
 from . import config
 from urllib.error import URLError, HTTPError  # 导入异常类
 import json
@@ -45,7 +45,7 @@ class ConfigurationForm(forms.Form):
             task_id = "task_id"
             task_status = "task_status"
             console_output = "console_output"
-            response = email.send(notification_app_name, task_project_name,
+            response = notification.send(notification_app_name, task_project_name,
                                   task_name, task_id, task_status,
                                   console_output, self.cleaned_data)
             if response.status == 200 or response.status == 201:
