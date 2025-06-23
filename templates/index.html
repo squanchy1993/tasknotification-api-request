@@ -1,0 +1,57 @@
+{% extends "app/plugins/templates/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans 'Tasks Notification' %}</h2>
+<p>Get notified when a task has finished processing, has been removed or has failed</p>
+<hr>
+<form action="/plugins/tasknotification-api-request/" method="post" class="mt-5">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group mb-3">
+        <label for="notification_app_name">App name</label>
+        <input name="notification_app_name" value="{{ form.notification_app_name.value }}" type="text" class="form-control" />
+        {{form.notification_app_name.errors}}
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group mb-3">
+        <label for="smtp_to_address">Send Notification to Address</label>
+        <input name="smtp_to_address" value="{{ form.smtp_to_address.value }}" type="text" class="form-control" placeholder="api address"/>
+        {{ form.smtp_to_address.errors }}
+      </div>
+    </div>
+  </div>
+  <p><b>Allowed Notifications</b></p>
+  <div class="checkbox mb-3">
+    <label>
+      <input name="notify_task_completed" {% if form.notify_task_completed.value %} checked {% endif %} type="checkbox"> Task Completed
+    </label>
+    {{form.notify_task_completed.errors}}
+  </div>
+  <div class="checkbox mb-3">
+    <label>
+      <input name="notify_task_failed" {% if form.notify_task_failed.value %} checked {% endif %} type="checkbox"> Task Failed
+    </label>
+    {{form.notify_task_failed.errors}}
+  </div>
+  <div class="checkbox mb-3">
+    <label>
+      <input name="notify_task_removed" {% if form.notify_task_removed.value %} checked {% endif %} type="checkbox"> Task Removed
+    </label>
+    {{form.notify_task_removed.errors}}
+  </div>
+  <br>
+  <h3>Smtp Settings</h3>
+  <br>
+  <hr>
+  <p>
+    {{ form.non_field_errors }}
+  </p>
+  <div>
+    <button name="apply_configuration" value="yes" class="btn btn-primary">Apply Settings </button>
+    <button name="test_configuration" value="yes" class="btn btn-info">Send api request</button>
+  </div>
+</form>
+{% endblock %}

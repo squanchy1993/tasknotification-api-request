@@ -1,0 +1,17 @@
+{
+	"name": "Task Notification API REQUEST",
+	"webodmMinVersion": "0.6.23",
+	"description": "Send notified when a task has finished processing, has been removed or has failed",
+	"version": "0.1.0",
+	"author": "Ronald",
+	"email": "ronadlwilsonmachado@gmail.com",
+	"repository": "https://github.com/OpenDroneMap/WebODM",
+	"tags": [
+		"notification",
+		"email",
+		"smtp"
+	],
+	"homepage": "https://github.com/OpenDroneMap/WebODM",
+	"experimental": false,
+	"deprecated": false
+}
